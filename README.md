@@ -43,7 +43,7 @@ So what's new :
 - New flag in config_collision.c to make HORIZONTAL_WIND's pushAngle relative to the linked object's oFaceAngleYaw
 
 **Shell Coyote Time**
-- Add Coyote Time to shell will falling, can be deactivate by commenting the define in config_objects.h
+- Add Coyote Time to shell while falling, can be deactivate by commenting the define in config_objects.h
 
 **New Geo ASM**
 - Add a new geo_change_prim_color function to change dynamically the primitive color through a new oRGBValue Object Field

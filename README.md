@@ -40,6 +40,7 @@ So what's new :
 - New vertical wind collision with configurable stabilization height, death at bottom policy is the same has vanilla vertical wind
 - Another vertical wind collision, similar to the previous one but you don't die at bottom
 - New flag in config_collision.c to choose if metal mario can resist all kind of wind
+- New flag in config_collision.c to make HORIZONTAL_WIND's pushAngle relative to the linked object's oFaceAngleYaw
 
 **Shell Coyote Time**
 - Add Coyote Time to shell will falling, can be deactivate by commenting the define in config_objects.h

@@ -139,6 +139,9 @@ s32 check_fall_damage_or_get_stuck(struct MarioState *m, u32 hardFallAction) {
 
 s32 check_horizontal_wind(struct MarioState *m) {
     struct Surface *floor = m->floor;
+#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
+    struct Object *object;
+#endif
     f32 speed;
     s16 pushAngle;
 
@@ -149,6 +152,13 @@ s32 check_horizontal_wind(struct MarioState *m) {
 #endif
         pushAngle = floor->force << 8;
 
+#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
+        // If the surface belong to an object add the pushAngle to the object yaw angle
+        object = floor->object;
+        if(object != NULL) {
+            pushAngle += object->oFaceAngleYaw;
+        }
+#endif
         m->slideVelX += 1.2f * sins(pushAngle);
         m->slideVelZ += 1.2f * coss(pushAngle);
 

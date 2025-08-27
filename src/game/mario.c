@@ -1775,7 +1775,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         // Both of the wind handling portions play wind audio only in
         // non-Japanese releases.
         if (gMarioState->floor->type == SURFACE_HORIZONTAL_WIND) {
-            spawn_wind_particles(0, (gMarioState->floor->force << 8));
+            s16 pushAngle = gMarioState->floor->force << 8;
+#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
+            // If the surface belong to an object add the pushAngle to the object yaw angle
+            struct Object *object = gMarioState->floor->object;
+            if(object != NULL){
+                pushAngle += object->oFaceAngleYaw;
+            }
+#endif
+            spawn_wind_particles(0, pushAngle);
             play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
         }
 

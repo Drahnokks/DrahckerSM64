@@ -208,6 +208,9 @@ u32 mario_update_moving_sand(struct MarioState *m) {
 
 u32 mario_update_windy_ground(struct MarioState *m) {
     struct Surface *floor = m->floor;
+#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
+    struct Object *object;
+#endif
 
 #ifdef WIND_RESISTANT_METAL_CAP
     if (floor->type == SURFACE_HORIZONTAL_WIND && !(m->flags & MARIO_METAL_CAP)) {
@@ -231,6 +234,13 @@ u32 mario_update_windy_ground(struct MarioState *m) {
             pushSpeed = 3.2f + (gGlobalTimer % 4);
         }
 
+#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
+        // If the surface belong to an object add the pushAngle to the object yaw angle
+        object = floor->object;
+        if(object != NULL) {
+            pushAngle += object->oFaceAngleYaw;
+        }
+#endif
         m->vel[0] += pushSpeed * sins(pushAngle);
         m->vel[2] += pushSpeed * coss(pushAngle);
 

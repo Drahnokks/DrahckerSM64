@@ -32,6 +32,11 @@
 #define WIND_RESISTANT_METAL_CAP
 
 /**
+ * When walking on HORIZONTAL_WIND the push angle from params is added to the linked object's oFaceAngleYaw (if the object exists)
+ */
+#define WIND_PUSH_ANGLE_OBJECT_RELATIVE
+
+/**
  * Collision data is the type that the collision system uses. All data by default is stored as an s16, but you may change it to s32.
  * Naturally, that would double the size of all collision data, but would allow you to use 32 bit values instead of 16.
  * Rooms are s8 in vanilla, but if you somehow have more than 255 rooms, you may raise this number.

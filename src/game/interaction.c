@@ -1580,11 +1580,30 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
 
         m->flags &= ~MARIO_CAP_ON_HEAD & ~MARIO_CAP_IN_HAND;
         m->flags |= capFlag;
+        #ifdef CAP_TIMER_THROUGH_BPARAM_1
+            u8 capParam = GET_BPARAM1(obj->oBehParams);
+        #endif
 
         switch (capFlag) {
+            #ifdef CAP_TIMER_THROUGH_BPARAM_1
+            // * 30 because 30 FPS, if the bparam 1 is 0, use the default value
+            case MARIO_VANISH_CAP: 
+                capTime = capParam != 0 ? capParam * 30 : 600; 
+                capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); 
+                break;
+            case MARIO_METAL_CAP:  
+                capTime = capParam != 0 ? capParam * 30 : 600; 
+                capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP); 
+                break;
+            case MARIO_WING_CAP:   
+                capTime = capParam != 0 ? capParam * 30 : 1800; 
+                capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); 
+                break;
+            #else
             case MARIO_VANISH_CAP: capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
             case MARIO_METAL_CAP:  capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP); break;
             case MARIO_WING_CAP:   capTime = 1800; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
+            #endif
         }
 
         if (capTime > m->capTimer) {

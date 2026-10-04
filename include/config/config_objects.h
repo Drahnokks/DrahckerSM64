@@ -143,3 +143,12 @@
  * Falling from a platform with allows coyote time frame
  */
 #define KOOPA_SHELL_COYOTE_TIME  10
+
+/*********************
+ * -- EXCLAMATION BOX --
+ *********************/
+
+/**
+ * Falling from a platform with allows coyote time frame
+ */
+#define CAP_TIMER_THROUGH_BPARAM_1

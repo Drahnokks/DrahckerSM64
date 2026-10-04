@@ -124,7 +124,7 @@ void exclamation_box_spawn_contents(struct ExclamationBoxContents *contentsList,
         contentsObj->oVelY = 20.0f;
         contentsObj->oForwardVel = 3.0f;
         contentsObj->oMoveAngleYaw = gMarioObject->oMoveAngleYaw;
-        OR_BPARAM1(o->oBehParams, contents->behParam);
+        SET_BPARAM1(contentsObj->oBehParams, BPARAM1);
         if (contents->model == MODEL_STAR) {
             o->oFlags |= OBJ_FLAG_PERSISTENT_RESPAWN;
         }

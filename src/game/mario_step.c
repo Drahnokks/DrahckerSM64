@@ -220,6 +220,14 @@ u32 mario_update_windy_ground(struct MarioState *m) {
         f32 pushSpeed;
         s16 pushAngle = floor->force << 8;
 
+#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
+        // If the surface belong to an object add the pushAngle to the object yaw angle
+        object = floor->object;
+        if(object != NULL) {
+            pushAngle += object->oFaceAngleYaw;
+        }
+#endif
+
         if (m->action & ACT_FLAG_MOVING) {
             s16 pushDYaw = m->faceAngle[1] - pushAngle;
 
@@ -234,13 +242,6 @@ u32 mario_update_windy_ground(struct MarioState *m) {
             pushSpeed = 3.2f + (gGlobalTimer % 4);
         }
 
-#ifdef WIND_PUSH_ANGLE_OBJECT_RELATIVE
-        // If the surface belong to an object add the pushAngle to the object yaw angle
-        object = floor->object;
-        if(object != NULL) {
-            pushAngle += object->oFaceAngleYaw;
-        }
-#endif
         m->vel[0] += pushSpeed * sins(pushAngle);
         m->vel[2] += pushSpeed * coss(pushAngle);
 

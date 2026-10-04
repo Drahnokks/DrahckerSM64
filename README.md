@@ -45,6 +45,9 @@ So what's new :
 **Shell Coyote Time**
 - Add Coyote Time to shell while falling, can be deactivate by commenting the define in config_objects.h
 
+**Cap Timer**
+- When placing an Exclamation box in your level, you can use BPARAM 1 to change the duration of the cap (in seconds), if you let 0 it use the default value
+
 **New Geo ASM**
 - Add a new geo_change_prim_color function to change dynamically the primitive color through a new oRGBValue Object Field
 

@@ -142,7 +142,7 @@ Gfx *geo_change_prim_color(s32 callContext, struct GraphNode *node, UNUSED s32 c
 
         gfxHead = alloc_display_list(sizeof(Gfx) * 2);
         // IMPORTANT TO MAKE IT WORKS
-        SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, LAYER_TRANSPARENT);
+        SET_GRAPH_NODE_LAYER(currentGraphNode->fnNode.node.flags, parameter);
 
         Gfx *gfx = gfxHead;
         gDPSetPrimColor(gfx++, 0, 0, redValue, greenValue, blueValue, alphaValue);
